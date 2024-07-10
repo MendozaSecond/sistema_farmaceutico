@@ -4,6 +4,13 @@ if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit;
 }
+
+include_once '../config/database.php';
+include_once '../modelos/Venta.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$venta = new Venta($db);
 ?>
 
 <!DOCTYPE html>
@@ -17,65 +24,33 @@ if (!isset($_SESSION['usuario_id'])) {
         <a href="../controladores/ControladorUsuario.php?action=logout">Cerrar Sesión</a>
     </div>
 
-    <h2>Registro de Ventas</h2>
+    <h2>Ventas Registradas</h2>
+    <a href="registrar_venta.php">Registrar Nueva Venta</a>
+    <br><br>
 
-    <!-- Formulario para registrar nueva venta -->
-    <form action="../controladores/ControladorVenta.php?action=registrar" method="post">
-        <h3>Registrar Venta</h3>
-        <label for="medicina_id">Medicina:</label>
-        <select name="medicina_id" id="medicina_id" required>
-            <?php
-            include_once '../config/database.php';
-            include_once '../modelos/Inventario.php';
-
-            $database = new Database();
-            $db = $database->getConnection();
-            $medicina = new Inventario($db);
-            $stmt = $medicina->leer(); // Método para obtener medicinas activas
-
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                extract($row);
-                echo "<option value='{$id}'>{$nombre} - {$descripcion}</option>";
-            }
-            ?>
-        </select>
-        <br>
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" name="cantidad" id="cantidad" min="1" required>
-        <br>
-        <button type="submit">Registrar Venta</button>
-    </form>
-
-    <hr>
-
-    <!-- Lista de ventas registradas -->
-    <h3>Historial de Ventas</h3>
     <table border="1">
         <thead>
             <tr>
-                <th>ID Venta</th>
-                <th>Medicina</th>
-                <th>Cantidad</th>
+                <th>ID</th>
                 <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Cédula</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            include_once '../modelos/Venta.php';
-
-            $venta = new Venta($db);
-            $stmt = $venta->leer(); // Método para obtener todas las ventas
-
+            $stmt = $venta->leer();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
                 echo "<tr>";
                 echo "<td>{$id}</td>";
-                echo "<td>{$nombre_medicina}</td>";
-                echo "<td>{$cantidad}</td>";
                 echo "<td>{$fecha}</td>";
+                echo "<td>{$nombre_cliente}</td>";
+                echo "<td>{$cedula_cliente}</td>";
                 echo "<td>";
-                echo "<a href='editar_venta.php?id={$id}'>Editar</a>";
+                echo "<a href='editar_venta.php?id={$id}'>Editar</a> ";
+                echo "<a href='../controladores/ControladorVenta.php?action=eliminar&id={$id}'>Eliminar</a>";
                 echo "</td>";
                 echo "</tr>";
             }

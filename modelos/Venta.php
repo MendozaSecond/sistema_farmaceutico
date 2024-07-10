@@ -4,31 +4,36 @@ class Venta {
     private $table_name = "ventas";
 
     public $id;
-    public $medicina_id;
-    public $cantidad;
     public $fecha;
+    public $nombre_cliente;
+    public $cedula_cliente;
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
     public function registrar() {
-        $query = "INSERT INTO " . $this->table_name . " SET id_medicina=:id_medicina, cantidad=:cantidad, fecha=NOW()";
+        $query = "INSERT INTO " . $this->table_name . " SET fecha=NOW(), nombre_cliente=:nombre_cliente, cedula_cliente=:cedula_cliente";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":id_medicina", $this->medicina_id); // Ajusta el nombre del parámetro según tu base de datos
-        $stmt->bindParam(":cantidad", $this->cantidad);
+        $stmt->bindParam(":nombre_cliente", $this->nombre_cliente);
+        $stmt->bindParam(":cedula_cliente", $this->cedula_cliente);
 
-        return $stmt->execute();
+        if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function leer() {
-        $query = "SELECT v.id, m.nombre AS nombre_medicina, v.cantidad, v.fecha FROM " . $this->table_name . " v LEFT JOIN medicinas m ON v.id = m.id ORDER BY v.fecha DESC";
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY fecha DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-
         return $stmt;
     }
+
     public function leerUno() {
         $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
@@ -37,20 +42,21 @@ class Venta {
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
-            $this->medicina_id = $row['id_medicina'];
-            $this->cantidad = $row['cantidad'];
             $this->fecha = $row['fecha'];
+            $this->nombre_cliente = $row['nombre_cliente'];
+            $this->cedula_cliente = $row['cedula_cliente'];
         }
     }
 
     public function actualizar() {
-        $query = "UPDATE " . $this->table_name . " SET id_medicina=:id_medicina, cantidad=:cantidad WHERE id=:id";
+        $query = "UPDATE " . $this->table_name . " SET nombre_cliente=:nombre_cliente, cedula_cliente=:cedula_cliente WHERE id=:id";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":id", $this->id);
-        $stmt->bindParam(":id_medicina", $this->medicina_id);
-        $stmt->bindParam(":cantidad", $this->cantidad);
+        $stmt->bindParam(":nombre_cliente", $this->nombre_cliente);
+        $stmt->bindParam(":cedula_cliente", $this->cedula_cliente);
 
         return $stmt->execute();
     }
 }
+?>
