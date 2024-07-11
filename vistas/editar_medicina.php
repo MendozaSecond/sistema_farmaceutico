@@ -50,9 +50,11 @@ if (isset($_GET['id'])) {
         <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" id="cantidad" value="<?php echo $inventario->cantidad; ?>" required>
         <br>
+        <br>
         <button type="submit">Actualizar</button>
+        ||
+        <button type="button" onclick="window.history.back()">Cancelar</button>
     </form>
 
-    <p><a href="inventario.php">Volver al Inventario</a></p>
 </body>
 </html>

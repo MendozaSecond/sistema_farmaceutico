@@ -57,6 +57,8 @@ $inventario = new Inventario($db);
         <button type="button" onclick="agregarDetalle()">Agregar Producto</button>
         <br><br>
         <button type="submit">Registrar Venta</button>
+        ||
+        <button type="button" onclick="window.history.back()">Cancelar</button>
     </form>
 
     <script>
