@@ -7,6 +7,7 @@ class Venta {
     public $fecha;
     public $nombre_cliente;
     public $cedula_cliente;
+    public $estado;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -28,7 +29,7 @@ class Venta {
     }
 
     public function leer() {
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY fecha DESC";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE estado = 'A'; ORDER BY fecha id";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -55,6 +56,14 @@ class Venta {
         $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":nombre_cliente", $this->nombre_cliente);
         $stmt->bindParam(":cedula_cliente", $this->cedula_cliente);
+
+        return $stmt->execute();
+    }
+
+    public function eliminar() {
+        $query = "UPDATE " . $this->table_name . " SET estado = 'I' WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->id);
 
         return $stmt->execute();
     }

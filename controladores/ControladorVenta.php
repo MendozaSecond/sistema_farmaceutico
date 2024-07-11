@@ -68,7 +68,15 @@ class ControladorVenta {
     }
 
     public function eliminar() {
-        // Implementar lógica para eliminar ventas si es necesario
+        if (isset($_GET['id'])) {
+            $this->venta->id = $_GET['id'];
+            if ($this->venta->eliminar()) {
+                header("Location: ../vistas/ventas.php");
+                exit;
+            } else {
+                echo "Error al eliminar la venta.";
+            }
+        }
     }
 }
 
