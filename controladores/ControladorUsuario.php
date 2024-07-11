@@ -23,7 +23,11 @@ class ControladorUsuario {
                 $_SESSION['rol'] = $this->usuario->rol;
                 header("Location: ../index.php");
             } else {
-                echo "Nombre de usuario o contraseña incorrectos.";
+                if ($this->usuario->login()) {
+                    
+                } else {
+                    header("Location: ../vistas/login.php?mensaje=usuario_incorrecto");
+                }
             }
         } else {
             echo "No se recibió un formulario de inicio de sesión válido.";
@@ -37,7 +41,7 @@ class ControladorUsuario {
             $this->usuario->rol = $_POST['rol'];
 
             if ($this->usuario->crearUsuario()) {
-                header("Location: ../vistas/login.php?mensaje=usuario_creado");
+                header("Location: ../vistas/login.php?mensaje=uscreauario_do");
             } else {
                 echo "Error al crear el usuario.";
             }

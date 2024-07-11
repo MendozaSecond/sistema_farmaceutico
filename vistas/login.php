@@ -7,6 +7,9 @@
     <?php if(isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_creado'): ?>
         <p>Usuario creado exitosamente.</p>
     <?php endif; ?>
+    <?php if(isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_incorrecto'): ?>
+        <p>Nombre de usuario o contraseña incorrectos.</p>
+    <?php endif; ?>
 
     <form action="../controladores/ControladorUsuario.php?action=login" method="post">
         <input type="hidden" name="action" value="login">
