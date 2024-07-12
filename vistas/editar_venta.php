@@ -62,6 +62,15 @@ $detalles = $detalleVenta->leerPorVenta($venta->id);
             `;
             productos.appendChild(nuevoProducto);
             actualizarPrecios();
+
+            // Seleccionar el producto adecuado
+            if (id !== '') {
+                const select = nuevoProducto.querySelector('.medicina');
+                select.value = id;
+                const precio = parseFloat(select.options[select.selectedIndex].getAttribute('data-precio'));
+                nuevoProducto.querySelector('.precio_unitario').value = precio.toFixed(2);
+                actualizarTotal();
+            }
         }
 
         function actualizarPrecios() {
