@@ -41,7 +41,7 @@ class ControladorUsuario {
             $this->usuario->rol = $_POST['rol'];
 
             if ($this->usuario->crearUsuario()) {
-                header("Location: ../vistas/login.php?mensaje=uscreauario_do");
+                header("Location: ../vistas/login.php?mensaje=usuario_creado");
             } else {
                 echo "Error al crear el usuario.";
             }
