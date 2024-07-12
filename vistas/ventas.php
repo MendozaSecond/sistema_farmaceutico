@@ -25,16 +25,16 @@ $venta = new Venta($db);
     </div>
 
     <h2>Ventas Registradas</h2>
-    <a href="registrar_venta.php">Registrar Nueva Venta</a>
+    <button onclick="window.location.href='registrar_venta.php'">Registrar Nueva Venta</button>
     <br><br>
 
     <table border="1">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Fecha</th>
                 <th>Cliente</th>
                 <th>Cédula</th>
+                <th>Total</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -44,13 +44,13 @@ $venta = new Venta($db);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
                 echo "<tr>";
-                echo "<td>{$id}</td>";
                 echo "<td>{$fecha}</td>";
                 echo "<td>{$nombre_cliente}</td>";
                 echo "<td>{$cedula_cliente}</td>";
+                echo "<td>{$total}</td>";
                 echo "<td>";
-                echo "<a href='editar_venta.php?id={$id}'>Editar</a> ";
-                echo "<a href='../controladores/ControladorVenta.php?action=eliminar&id={$id}'>Eliminar</a>";
+                echo "<button onclick=\"window.location.href='editar_venta.php?id={$id}'\">Editar</button>";
+                echo "<button onclick=\"window.location.href='../controladores/ControladorVenta.php?action=eliminar&id={$id}'\">Eliminar</button>";
                 echo "</td>";
                 echo "</tr>";
             }

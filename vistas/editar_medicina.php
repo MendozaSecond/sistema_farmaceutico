@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
 
     <!-- Formulario para editar medicina -->
     <form action="../controladores/ControladorInventario.php?action=editar" method="post">
-        <div class="inventario_cuerpo">
+        <div class="inventario_cuerpo ">
             <div class="agg_inventario_box">
                 <div class="login-header">
                     <span>Medicina</span>
