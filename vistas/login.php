@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
+
 <body>
-    <?php if(isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_creado'): ?>
+    <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_creado') : ?>
         <p>Usuario creado exitosamente.</p>
     <?php endif; ?>
-    <?php if(isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_incorrecto'): ?>
-        <p>Nombre de usuario o contraseña incorrectos.</p>
+    <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_incorrecto') : ?>
+        <span>Nombre de usuario o contraseña incorrectos.</span>
     <?php endif; ?>
-
+    
     <form action="../controladores/ControladorUsuario.php?action=login" method="post">
-        <input type="hidden" name="action" value="login">
-        <h2>Iniciar Sesión</h2>
-        <label for="nombre_usuario">Nombre de Usuario:</label>
-        <input type="text" name="nombre_usuario" id="nombre_usuario" required>
-        <br>
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" name="contrasena" id="contrasena" required>
-        <br>
-        <button type="submit">Iniciar Sesión</button>
+        <div class="wrapper">
+            <div class="login_box">
+                <input type="hidden" name="action" value="login">
+                <div class="login-header">
+                    <span>Iniciar Sesión</span>
+                </div>
+                <div class="input_box">
+                    <input type="text" name="nombre_usuario" id="nombre_usuario" class="input-field" required>
+                    <label for="nombre_usuario" class="label">Nombre de Usuario:</label>
+                </div>
+                <div class="input_box">
+                    <input type="password" name="contrasena" id="contrasena" class="input-field" required>
+                    <label for="contrasena" class="label">Contraseña:</label>
+                </div>
+                <div class="input_box">
+                    <input type="submit" class="input-submit" value="Iniciar Sesión">
+                </div>
+                <div class="registrar">
+                    <span>¿No tienes una cuenta? <a href="crear_usuario.php">Crear usuario</a></span>
+                </div>
+            </div>
+        </div>
     </form>
 
-    <p>¿No tienes una cuenta? <a href="crear_usuario.php">Crear usuario</a></p>
 </body>
+
 </html>
