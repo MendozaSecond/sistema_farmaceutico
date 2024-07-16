@@ -7,15 +7,20 @@
 </head>
 
 <body>
-    <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_creado') : ?>
-        <p>Usuario creado exitosamente.</p>
-    <?php endif; ?>
-    <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_incorrecto') : ?>
-        <span>Nombre de usuario o contraseña incorrectos.</span>
-    <?php endif; ?>
-    
+    <div class="sesion">
+        <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_creado') : ?>
+            <p1>Usuario creado exitosamente.</p1>
+        <?php endif; ?>
+        <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'usuario_incorrecto') : ?>
+            <strong>
+                <p1>Nombre de usuario o contraseña incorrectos.</p1>
+            </strong>
+        <?php endif; ?>
+    </div>
+
     <form action="../controladores/ControladorUsuario.php?action=login" method="post">
         <div class="wrapper">
+
             <div class="login_box">
                 <input type="hidden" name="action" value="login">
                 <div class="login-header">

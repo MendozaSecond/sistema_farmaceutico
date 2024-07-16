@@ -65,6 +65,15 @@ a:hover {
     border-radius: 0 0 20px 30px;
 }
 
+.sesion{
+    width: 100%;
+    background-color: #0000007f;
+}
+
+.sesion p1{
+    font-size: 19px;
+    color: red;
+}
 .login-header span{
     font-size: 30px;
     color: var(--black-color);
