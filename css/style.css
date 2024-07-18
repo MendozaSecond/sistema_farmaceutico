@@ -274,6 +274,22 @@ a:hover {
     width: 500px;
 }
 
+/*Venta*/
+
+.venta{
+    background-image: url(../img/venta.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+img{
+    width: 300px;
+    align-content: center;
+    justify-content: center;
+}
+
 /*TABLA*/
 table {
     width: 100%;
