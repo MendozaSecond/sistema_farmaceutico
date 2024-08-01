@@ -208,7 +208,7 @@ a:hover {
 }
 
 .inventario_cuerpo{
-    background-color: #00000033;
+    background-color: #00000050;
     display: flex;
     min-height: 100%;
     align-items: center;
@@ -256,7 +256,7 @@ a:hover {
 }
 
 .titulo{
-    background-color: #00000033;
+    background-color: #00000050;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -331,4 +331,72 @@ table a {
 
 table a:hover {
     text-decoration: underline;
+}
+
+
+/*VENTA */
+.select_Venta{
+    width: 35%;
+    height: 55px;
+    background: transparent;
+    color: var(--second-color);
+    font-size: 16px;
+    padding-inline: 20px 10px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    outline: none;
+    appearance: none; /* Esto es para quitar el estilo predeterminado del select en algunos navegadores */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    z-index: 1;
+}
+
+.select_Venta option {
+    background: rgba(255, 255, 255, 0);; /* Fondo transparente */
+    color: black; /* Letras negras */
+}
+
+.select_Venta:focus option {
+    background: rgba(255, 255, 255, 0); /* Fondo transparente cuando se selecciona */
+    color: black; /* Color del texto cuando se selecciona */
+}
+
+.input_venta{
+    width: 20%;
+    height: 55px;
+    background: transparent;
+    color: var(--second-color);
+    font-size: 16px;
+    padding-inline: 20px 15px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    outline: none;
+    appearance: none; /* Esto es para quitar el estilo predeterminado del select en algunos navegadores */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1px;
+}
+
+.agg_venta_box{
+    position: relative;
+    width: 650px;
+    color: var(--second-color);
+    backdrop-filter: blur(25px);
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 5rem 2.5rem 1.5rem 2.5rem;
+    box-shadow: 0px 0px 10px 2px #00000033;
+}
+
+.total-venta-container {
+    text-align: right;
+    font-size: 20px;
+}
+
+.centrar_imagen {
+    display: block; /* Para asegurar que el margin auto funcione correctamente */
+    margin: 0 auto; /* Centra horizontalmente */
 }

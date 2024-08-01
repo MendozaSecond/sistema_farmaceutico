@@ -54,21 +54,22 @@ if (isset($_GET['id'])) {
                     <label for="nombre" class="label">Nombre:</label>
                 </div>
                 <div class="input_box">
-                <input type="text" name="descripcion" id="descripcion" class="input-field" value="<?php echo $inventario->descripcion; ?>" required>
-                <label for="descripcion" class="label">Descripción:</label>
-                </div> 
-                <div class="input_box">
-                <input type="number" name="precio" id="precio" step="0.01" class="input-field" value="<?php echo $inventario->precio; ?>" required>
-                <label for="precio" class="label">Precio:</label>
+                    <input type="text" name="descripcion" id="descripcion" class="input-field" value="<?php echo $inventario->descripcion; ?>" required>
+                    <label for="descripcion" class="label">Descripción:</label>
                 </div>
                 <div class="input_box">
-                <input type="number" name="cantidad" id="cantidad" class="input-field" value="<?php echo $inventario->cantidad; ?>" required>
-                <label for="cantidad" class="label">Cantidad:</label>
-                </div> 
+                    <input type="number" name="precio" id="precio" step="0.01" class="input-field" value="<?php echo $inventario->precio; ?>" required>
+                    <label for="precio" class="label">Precio:</label>
+                </div>
                 <div class="input_box">
-                <input type="submit" value="Actualizar" class="input-submit">
-                <br>
-                <input type="button" onclick="window.history.back()" value="Cancelar" class="input-submit">
+                    <input type="number" name="cantidad" id="cantidad" class="input-field" value="<?php echo $inventario->cantidad; ?>" required>
+                    <label for="cantidad" class="label">Cantidad:</label>
+                </div>
+                <div class="input_box">
+                    <input type="submit" value="Actualizar" class="input-submit">
+                    <br>
+                    <input type="button" onclick="window.history.back()" value="Cancelar" class="input-submit">
+                </div>
             </div>
         </div>
     </form>

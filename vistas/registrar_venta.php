@@ -15,8 +15,10 @@ $inventario = new Inventario($db);
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Registrar Venta</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script>
         function actualizarTotal() {
             let totalVenta = 0;
@@ -36,7 +38,8 @@ $inventario = new Inventario($db);
             const nuevoProducto = document.createElement('div');
             nuevoProducto.className = 'producto';
             nuevoProducto.innerHTML = `
-                <select class="medicina" name="medicinas[]">
+                <select class="medicina select_Venta" name="medicinas[]">
+                 <option value="0" selected>- Seleccione medicina -</option>
                     <?php
                     $stmt = $inventario->leer();
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -45,10 +48,10 @@ $inventario = new Inventario($db);
                     }
                     ?>
                 </select>
-                <input type="number" class="cantidad" name="cantidad[]" min="1" value="1" oninput="actualizarTotal()">
-                <input type="number" class="precio_unitario" name="precio_unitario[]" readonly>
-                <input type="number" class="total_producto" name="total_producto[]" readonly>
-                <br><br>
+                <input type="number" class="cantidad input_venta" name="cantidad[]" min="1" value="1" oninput="actualizarTotal()">
+                <input type="number" class="precio_unitario input_venta" name="precio_unitario[]" readonly>
+                <input type="number" class="total_producto input_venta" name="total_producto[]" readonly>
+                
             `;
             productos.appendChild(nuevoProducto);
             actualizarPrecios();
@@ -72,28 +75,52 @@ $inventario = new Inventario($db);
         });
     </script>
 </head>
-<body>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h1>Bienvenido, <?php echo $_SESSION['nombre_usuario']; ?></h1>
-        <a href="../controladores/ControladorUsuario.php?action=logout">Cerrar Sesión</a>
+
+<body class="venta">
+    <div class="cabecera">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Bienvenido, <?php echo $_SESSION['nombre_usuario']; ?></h1>
+            <a href="../controladores/ControladorUsuario.php?action=logout">Cerrar Sesión</a>
+        </div>
+    </div>
+    <div class="titulo">
+        <h1>Registrar Venta</h1>
     </div>
 
-    <h2>Registrar Venta</h2>
-
+    <!-- Formulario para registrar venta -->
     <form action="../controladores/ControladorVenta.php?action=registrar" method="post">
-        <label for="nombre_cliente">Nombre del Cliente:</label>
-        <input type="text" id="nombre_cliente" name="nombre_cliente" required><br><br>
+        <div class="inventario_cuerpo ">
+            <div class="agg_venta_box">
+                <div class="login-header">
+                    <span>Factura</span>
+                </div>
+                <div class="input_box">
+                    <input type="text" id="nombre_cliente" name="nombre_cliente" class="input-field" required>
+                    <label for="nombre_cliente" class="label">Nombre del Cliente:</label>
+                </div>
 
-        <label for="cedula_cliente">Cédula del Cliente:</label>
-        <input type="text" id="cedula_cliente" name="cedula_cliente" required><br><br>
+                <div class="input_box">
+                    <input type="text" id="cedula_cliente" name="cedula_cliente" class="input-field" required><br>
+                    <label for="cedula_cliente" class="label">Cédula del Cliente:</label>
+                </div>
+                <div class="input_box">
+                    <div id="productos"></div>
+                </div>
 
-        <div id="productos"></div>
-        <button type="button" id="agregar_producto">Agregar Producto</button><br><br>
+                <input type="button" id="agregar_producto" value="+" class="input-submit">
 
-        <label>Total de la Venta: $<span id="total_venta">0.00</span></label><br><br>
+                <div class="total-venta-container">
+                    <label>Total de la Venta: $<span id="total_venta">0.00</span></label><br>
+                </div>
 
-        <button type="submit">Registrar Venta</button>
-        <button type="button" onclick="window.location.href='ventas.php'">Cancelar</button>
+                <div class="input_box">
+                    <input type="submit" value="Vender" class="input-submit">
+                    <br>
+                    <input type="button" onclick="window.location.href='ventas.php'" value="Cancelar" class="input-submit">
+                </div>
+            </div>
+        </div>
     </form>
 </body>
+
 </html>

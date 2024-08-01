@@ -33,41 +33,53 @@ $venta = new Venta($db);
     </div>
     <div class="inventario_cuerpo">
         <div class="agg_inventario_box">
-        <div class="input_box">
-            <img src="../img/caja.png" alt="Caja Venta"  onclick="window.location.href='registrar_venta.php'" >
-            <input type="submit" class="input-submit" onclick="window.location.href='registrar_venta.php'" value="Registrar Nueva Venta">
-        </div>
+            <div class="login-header">
+                <span>Caja</span>
+            </div>
+            <div class="input_box">
+                <img class="centrar_imagen" src="../img/caja.png" alt="Caja Venta" onclick="window.location.href='registrar_venta.php'">
+                <br>
+                <input type="submit" class="input-submit" onclick="window.location.href='registrar_venta.php'" value="Registrar Nueva Venta">
+            </div>
         </div>
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Cliente</th>
-                    <th>Cédula</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $stmt = $venta->leer();
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    extract($row);
-                    echo "<tr>";
-                    echo "<td>{$fecha}</td>";
-                    echo "<td>{$nombre_cliente}</td>";
-                    echo "<td>{$cedula_cliente}</td>";
-                    echo "<td>{$total}</td>";
-                    echo "<td>";
-                    echo "<button onclick=\"window.location.href='editar_venta.php?id={$id}'\">Editar</button>";
-                    echo "<button onclick=\"window.location.href='../controladores/ControladorVenta.php?action=eliminar&id={$id}'\">Eliminar</button>";
-                    echo "</td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+        <div class="espacio"></div>
+        <!-- Lista de Facturas -->
+        <div class="medicinas_box">
+            <div class="login-header">
+                <span>Facturas</span>
+            </div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Cédula</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $stmt = $venta->leer();
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        extract($row);
+                        echo "<tr>";
+                        echo "<td>{$fecha}</td>";
+                        echo "<td>{$nombre_cliente}</td>";
+                        echo "<td>{$cedula_cliente}</td>";
+                        echo "<td>{$total}</td>";
+                        echo "<td>";
+                        echo "<a href='editar_venta.php?id={$id}'>Editar</a>";
+                        echo " | ";
+                        echo "<a href='../controladores/ControladorVenta.php?action=eliminar&id={$id}'>Eliminar</a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 

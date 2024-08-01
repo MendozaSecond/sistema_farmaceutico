@@ -25,8 +25,10 @@ $detalles = $detalleVenta->leerPorVenta($venta->id);
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Editar Venta</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script>
         function actualizarTotal() {
             let totalVenta = 0;
@@ -46,7 +48,8 @@ $detalles = $detalleVenta->leerPorVenta($venta->id);
             const nuevoProducto = document.createElement('div');
             nuevoProducto.className = 'producto';
             nuevoProducto.innerHTML = `
-                <select class="medicina" name="medicinas[]">
+                <select class="medicina select_Venta" name="medicinas[]">
+                <option value="0" selected>- Seleccione medicina -</option>
                     <?php
                     $stmt = $inventario->leer();
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -55,10 +58,9 @@ $detalles = $detalleVenta->leerPorVenta($venta->id);
                     }
                     ?>
                 </select>
-                <input type="number" class="cantidad" name="cantidad[]" min="1" value="${cantidad}" oninput="actualizarTotal()">
-                <input type="number" class="precio_unitario" name="precio_unitario[]" value="${precioUnitario}" readonly>
-                <input type="number" class="total_producto" name="total_producto[]" value="${totalProducto}" readonly>
-                <br><br>
+                <input type="number" class="cantidad input_venta" name="cantidad[]" min="1" value="${cantidad}" oninput="actualizarTotal()">
+                <input type="number" class="precio_unitario input_venta" name="precio_unitario[]" value="${precioUnitario}" readonly>
+                <input type="number" class="total_producto input_venta" name="total_producto[]" value="${totalProducto}" readonly>
             `;
             productos.appendChild(nuevoProducto);
             actualizarPrecios();
@@ -93,28 +95,54 @@ $detalles = $detalleVenta->leerPorVenta($venta->id);
         });
     </script>
 </head>
-<body>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h1>Bienvenido, <?php echo $_SESSION['nombre_usuario']; ?></h1>
-        <a href="../controladores/ControladorUsuario.php?action=logout">Cerrar Sesión</a>
+
+<body class="venta">
+    <div class="cabecera">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Bienvenido, <?php echo $_SESSION['nombre_usuario']; ?></h1>
+            <a href="../controladores/ControladorUsuario.php?action=logout">Cerrar Sesión</a>
+        </div>
+    </div>
+    <div class="titulo">
+        <h1>Editar Venta</h1>
     </div>
 
-    <h2>Editar Venta</h2>
-
+    <!-- Formulario para actualizar venta -->
     <form action="../controladores/ControladorVenta.php?action=actualizar&id=<?php echo $venta->id; ?>" method="post">
-        <label for="nombre_cliente">Nombre del Cliente:</label>
-        <input type="text" id="nombre_cliente" name="nombre_cliente" value="<?php echo $venta->nombre_cliente; ?>" required><br><br>
+        <div class="inventario_cuerpo ">
+            <div class="agg_venta_box">
+                <div class="login-header">
+                    <span>Factura</span>
+                </div>
+                <div class="input_box">
+                    <input type="text" id="nombre_cliente" name="nombre_cliente" class="input-field" value="<?php echo $venta->nombre_cliente; ?>" required>
+                    <label for="nombre_cliente" class="label">Nombre del Cliente:</label>
+                </div>
 
-        <label for="cedula_cliente">Cédula del Cliente:</label>
-        <input type="text" id="cedula_cliente" name="cedula_cliente" value="<?php echo $venta->cedula_cliente; ?>" required><br><br>
+                <div class="input_box">
+                    <input type="text" id="cedula_cliente" name="cedula_cliente" class="input-field" value="<?php echo $venta->cedula_cliente; ?>" required>
+                    <label for="cedula_cliente" class="label">Cédula del Cliente:</label>
+                </div>
 
-        <div id="productos"></div>
-        <button type="button" id="agregar_producto">Agregar Producto</button><br><br>
+                <div class="input_box">
+                    <div id="productos"></div>
+                </div>
 
-        <label>Total de la Venta: $<span id="total_venta">0.00</span></label><br><br>
+                <input type="button" id="agregar_producto" value="+" class="input-submit">
 
-        <button type="submit">Actualizar Venta</button>
-        <button type="button" onclick="window.location.href='ventas.php'">Cancelar</button>
+                <div class="total-venta-container">
+                    <label>Total de la Venta: $<span id="total_venta">0.00</span></label><br>
+                </div>
+
+                <div class="input_box">
+                    <input type="submit" value="Actualizar Venta" class="input-submit">
+                    <br>
+                    <input type="button" onclick="window.location.href='ventas.php'" value="Cancelar" class="input-submit">
+                </div>
+            </div>
+        </div>
     </form>
+
 </body>
+
 </html>
